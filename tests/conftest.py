@@ -103,7 +103,7 @@ def deployed():
     WBTC_TOKEN.approve(strategy.CURVE_POOL(), toDeposit, {"from": deployer})
     ## Doing this gives us want
     pool = interface.ICurveStableSwapREN(strategy.CURVE_POOL())
-    pool.add_liquidity([toDeposit, 0], 0, {"from": deployer})
+    pool.add_liquidity([0, toDeposit, 0], 0, {"from": deployer})
 
     return DotMap(
         deployer=deployer,
@@ -175,3 +175,9 @@ def settKeeper(vault):
 @pytest.fixture
 def strategyKeeper(strategy):
     return accounts.at(strategy.keeper(), force=True)
+
+
+## Forces reset before each test
+@pytest.fixture(autouse=True)
+def isolation(fn_isolation):
+    pass
