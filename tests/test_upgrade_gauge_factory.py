@@ -33,7 +33,7 @@ These tests must be run on arbitrum-fork
 
 @pytest.fixture
 def vault_proxy():
-    return SettV3.at("0xBA418CDdd91111F5c1D1Ac2777Fa8CEa28D71843")
+    return SettV3.at("0x4591890225394BF66044347653e112621AF7DDeb")
 
 @pytest.fixture
 def controller_proxy(vault_proxy):
@@ -41,12 +41,12 @@ def controller_proxy(vault_proxy):
 
 @pytest.fixture
 def strat_proxy():
-    return MyStrategy.at("0x4C5d19Da5EaeC298B79879a5f7481bEDE055F4F8")
+    return MyStrategy.at("0xE83A790fC3B7132fb8d7f8d438Bc5139995BF5f4")
 
 @pytest.fixture
 def proxy_admin():
     """
-     Verify by doing web3.eth.getStorageAt("0x4C5d19Da5EaeC298B79879a5f7481bEDE055F4F8", int(
+     Verify by doing web3.eth.getStorageAt("0xE83A790fC3B7132fb8d7f8d438Bc5139995BF5f4", int(
         0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103
     )).hex()
     """
