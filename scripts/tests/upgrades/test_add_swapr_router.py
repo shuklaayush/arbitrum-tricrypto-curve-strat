@@ -28,7 +28,7 @@ These tests must be run on arbitrum-fork
 
 @pytest.fixture
 def vault_proxy():
-    return SettV3.at("0xBA418CDdd91111F5c1D1Ac2777Fa8CEa28D71843")
+    return SettV3.at("0x4591890225394BF66044347653e112621AF7DDeb")
 
 @pytest.fixture
 def controller_proxy(vault_proxy):
@@ -36,24 +36,15 @@ def controller_proxy(vault_proxy):
 
 @pytest.fixture
 def strat_proxy():
-    return MyStrategy.at("0x4C5d19Da5EaeC298B79879a5f7481bEDE055F4F8")
+    return MyStrategy.at("0xE83A790fC3B7132fb8d7f8d438Bc5139995BF5f4")
 
 @pytest.fixture
 def proxy_admin():
-    """
-     Verify by doing web3.eth.getStorageAt("0x4C5d19Da5EaeC298B79879a5f7481bEDE055F4F8", int(
-        0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103
-    )).hex()
-    """
-    return Contract.from_explorer("0x95713d825BcAA799A8e2F2b6c75aeD8b89124852")
-
+  return Contract.from_explorer("0x95713d825BcAA799A8e2F2b6c75aeD8b89124852")
 
 @pytest.fixture
 def proxy_admin_gov():
-    """
-        Also found at proxy_admin.owner()
-    """
-    return accounts.at("0x468A0FF843BC5D185D7B07e4619119259b03619f", force=True)
+  return accounts.at("0x468A0FF843BC5D185D7B07e4619119259b03619f", force=True)
 
 def test_upgrade_and_harvest(vault_proxy, controller_proxy, deployer, strat_proxy, proxy_admin, proxy_admin_gov):
     new_strat_logic = MyStrategy.deploy({"from": deployer})

@@ -44,13 +44,14 @@ contract MyStrategy is BaseStrategy {
     // We add liquidity here
     address public constant CURVE_POOL =
         0x960ea3e3C7FB317332d990873d354E18d7645590;
-    // Swap here
-    address public constant SUSHISWAP_ROUTER =
-        0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506;
 
     // CRV Emissions sent to
     address public constant badgerTree =
         0x635EB2C39C75954bb53Ebc011BDC6AfAAcE115A6;
+
+    // Swap via Swapr
+    address public constant SWAPR_ROUTER =
+        0x530476d5583724A89c8841eB6Da76E7Af4C0F17E;
 
     // NOTE: Gauge can change, see setGauge
     address public gauge; // Set in initialize
@@ -93,6 +94,8 @@ contract MyStrategy is BaseStrategy {
 
         /// @dev do one off approvals here
         IERC20Upgradeable(want).safeApprove(gauge, type(uint256).max);
+
+        // NOTE: Since we will upgrade to use SWAPR_ROUTER we need to give allowance through a convenience function
         IERC20Upgradeable(reward).safeApprove(SWAPR_ROUTER, type(uint256).max);
         IERC20Upgradeable(WBTC).safeApprove(CURVE_POOL, type(uint256).max);
     }
